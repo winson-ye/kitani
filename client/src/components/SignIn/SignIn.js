@@ -3,6 +3,7 @@ import { Avatar, Button, TextField, Link, Grid } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Paper, Container, Typography } from '@material-ui/core';
 import useStyles from './styles';
+import { useDispatch } from 'react-redux';
 
 function Copyright() {
   return (
@@ -19,7 +20,23 @@ function Copyright() {
 
 export default function SignIn() {
   const classes = useStyles();
-  const [isSignUp, setIsSignUp] = useState(false);
+  const dispatch = useDispatch();
+
+  const [isSignUp, setIsSignup] = useState(false);
+
+  const switchMode = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      //dispatch sign up action
+    } else {
+      //dispatch sign in action
+    }
+  }
 
   return (
     <Container maxWidth="xs">
@@ -30,7 +47,25 @@ export default function SignIn() {
         <Typography variant="h5">
           {isSignUp ? 'Sign up' : 'Sign in'}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          { isSignUp && (
+            <>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="First Name"
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Last Name"
+              />
+            </>
+          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -38,21 +73,16 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
+            label = "Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
           />
+          { isSignUp && <TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" type="password" /> }
           <Button
             type="submit"
             fullWidth
@@ -60,18 +90,13 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            { isSignUp ? 'Sign up' : 'Sign in' }
           </Button>
-          <Grid container justifyContent="space-between">
+          <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Forget password?"}
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Button onClick={switchMode}>
+                { isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up" }
+              </Button>
             </Grid>
           </Grid>
         </form>
