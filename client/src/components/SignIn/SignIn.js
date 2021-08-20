@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Avatar, Button, TextField, Link, Grid } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { Paper } from '@material-ui/core';
+import { Paper, Container, Typography } from '@material-ui/core';
+import useStyles from './styles';
 
 function Copyright() {
   return (
@@ -19,29 +17,9 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(2)
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
 export default function SignIn() {
   const classes = useStyles();
+  const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <Container maxWidth="xs">
@@ -50,7 +28,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">
-          Sign in
+          {isSignUp ? 'Sign up' : 'Sign in'}
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
