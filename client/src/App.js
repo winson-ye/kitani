@@ -6,7 +6,9 @@ import { getPosts } from './actions/posts';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import memories from './images/memories.png';
-import useStyles from './styles'; 
+import useStyles from './styles';
+
+import SignIn from './components/SignIn/SignIn';
 
 const App = () => {
     const classes = useStyles();
@@ -34,6 +36,7 @@ const App = () => {
                 </Grid>
             </Container>
         </Grow>
+        <SignIn />
         </Container>
     )
 }
