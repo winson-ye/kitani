@@ -26,10 +26,9 @@ export default function SignIn( { setUser } ) {
     e.preventDefault();
 
     if (isSignUp) {
-      dispatch(signup(form, history));
+      dispatch(signup(form, setUser));
     } else {
-      dispatch(signin(form, history));
-      setUser(JSON.parse(localStorage.getItem('profile')));
+      dispatch(signin(form, setUser));
     }
   }
 
