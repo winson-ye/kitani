@@ -1,41 +1,39 @@
 import React, { useState } from 'react';
-import { Avatar, Button, TextField, Link, Grid } from '@material-ui/core';
+import { Avatar, Button, TextField, Grid } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Paper, Container, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../../actions/auth';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const [isSignUp, setIsSignup] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [form, setForm] = useState(initialState);
 
   const switchMode = () => {
-    setIsSignup((prevIsSignup) => !prevIsSignup);
+    setForm(initialState);
+    setIsSignUp((prevIsSignup) => !prevIsSignup);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (isSignUp) {
-      //dispatch sign up action
+      dispatch(signup(form, history));
     } else {
-      //dispatch sign in action
+      dispatch(signin(form, history));
     }
+  }
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name] : e.target.value });
   }
 
   return (
@@ -56,6 +54,8 @@ export default function SignIn() {
                 required
                 fullWidth
                 label="First Name"
+                name="firstName"
+                onChange={handleChange}
               />
               <TextField
                 variant="outlined"
@@ -63,6 +63,8 @@ export default function SignIn() {
                 required
                 fullWidth
                 label="Last Name"
+                name="lastName"
+                onChange={handleChange}
               />
             </>
           )}
@@ -71,8 +73,9 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
             label="Email Address"
+            name="email"
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -80,9 +83,11 @@ export default function SignIn() {
             required
             fullWidth
             label = "Password"
+            name="password"
             type="password"
+            onChange={handleChange}
           />
-          { isSignUp && <TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" type="password" /> }
+          { isSignUp && <TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" name="confirmPassword" type="password" onChange={handleChange} /> }
           <Button
             type="submit"
             fullWidth
