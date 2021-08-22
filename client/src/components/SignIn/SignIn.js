@@ -4,7 +4,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Paper, Container, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { signin, signup } from '../../actions/auth';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
@@ -12,7 +11,6 @@ const initialState = { firstName: '', lastName: '', email: '', password: '', con
 export default function SignIn( { setUser } ) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [isSignUp, setIsSignUp] = useState(false);
   const [form, setForm] = useState(initialState);

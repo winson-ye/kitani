@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
@@ -10,8 +10,6 @@ import useStyles from './styles';
 
 const Navbar = ( { user, setUser }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const history = useHistory();
   const classes = useStyles();
 
   const logout = () => {
@@ -25,11 +23,14 @@ const Navbar = ( { user, setUser }) => {
     if (token) {
       const decodedToken = decode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-    }
+      console.log(decodedToken.exp * 1000);
+      console.log(new Date().getTime());
 
-    setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [location]);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
+  });
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
