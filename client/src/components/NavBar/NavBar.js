@@ -8,8 +8,7 @@ import memories from '../../images/memories.png';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
-const Navbar = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+const Navbar = ( { user, setUser }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -17,9 +16,6 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
-
-    history.push('/auth');
-
     setUser(null);
   };
 
