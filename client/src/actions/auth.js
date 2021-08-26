@@ -7,7 +7,7 @@ export const signin = (formData, setUser) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
 
-    setUser(JSON.parse(localStorage.getItem('profile')));
+    setUser((localStorage.getItem('profile')));
   } catch (error) {
     console.log(error);
   }
