@@ -8,7 +8,7 @@ import { signin, signup } from '../../actions/auth';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-export default function SignIn( { setUser } ) {
+export default function SignIn( { setUser }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 

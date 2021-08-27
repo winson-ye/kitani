@@ -7,7 +7,7 @@ import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
-const Navbar = ( { user, setUser }) => {
+const Navbar = ({ user, setUser }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
