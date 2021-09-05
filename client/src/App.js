@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import Navbar from './components/NavBar/NavBar';
-import AnimeList from './components/AnimeList/AnimeList';
+import AnimeListPage from './components/AnimeListPage/AnimeListPage';
 import Profile from './components/Profile/Profile';
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         <Navbar user={user} setUser={setUser} />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/animelist" exact component={AnimeList} />
+          <Route path="/animelist" exact component={AnimeListPage} />
           <Route path="/profile" exact component={Profile} />
         </Switch>
       </Container>

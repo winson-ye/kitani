@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Avatar, List, Grid, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useStyles from './styles';
-import AnimeListForm from '../AnimeListForm/AnimeListForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAnime, updateAnimeList } from '../../actions/animeList';
 import memories from '../../images/memories.png';
@@ -41,10 +40,6 @@ const AnimeList = () => {
   }
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item>
-        <AnimeListForm />
-      </Grid>
       <Grid item className={classes.list}>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="anime">
@@ -73,7 +68,6 @@ const AnimeList = () => {
           </Droppable>
         </DragDropContext>
       </Grid>
-    </Grid>
   );
 }
 
