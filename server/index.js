@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
+import animeListRoutes from './routes/animeList.js';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use('/users', userRoutes);
+app.use('/animelist', animeListRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://winson-ye:tripter908@cluster0.nzdnn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;
