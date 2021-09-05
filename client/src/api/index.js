@@ -11,3 +11,4 @@ export const signUp = (formData) => API.post('/users/signup', formData);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
+export const updateAnimeList = (updatedAnimeList) => API.put('/animelist', updatedAnimeList);

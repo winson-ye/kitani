@@ -1,10 +1,11 @@
 import { TextField, Button, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import useStyles from './styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addAnime } from '../../actions/animeList';
 
 const AnimeListForm = () => {
+    const animeList = useSelector((state) => state.animeList);
 
     const [ userInput, setUserInput ] = useState({ title: '', rank: 1 });
     const classes = useStyles();
@@ -16,7 +17,7 @@ const AnimeListForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addAnime(userInput));
+        dispatch(addAnime({ ...userInput, rank: animeList.length + 1}));
         setUserInput({ title: '', rank: 1 });
     }
     

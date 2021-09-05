@@ -25,3 +25,18 @@ export const addAnime = async (req, res) => {
 
 
 }
+
+export const replaceAnimeList = async (req, res) => {
+    const newAnimeList = req.body;
+
+    await Anime.deleteMany({});
+
+    for (const newAnime of newAnimeList) {
+        const newAnimeDoc = new Anime(newAnime);
+        await newAnimeDoc.save();
+    }
+
+    const updatedAnimeList = await Anime.find();
+
+    res.json(updatedAnimeList);
+}

@@ -8,7 +8,7 @@ export const getAnime = () => async (dispatch) => {
     } catch (error) {
         console.log(error.message);
     }
-}
+};
 
 export const addAnime = (anime) => async (dispatch) => {
     try {
@@ -18,4 +18,14 @@ export const addAnime = (anime) => async (dispatch) => {
     } catch (error) {
         console.log(error.message);
     }
-}
+};
+
+export const updateAnimeList = (newAnimeList) => async (dispatch) => {
+    try {
+        const { data } = await api.updateAnimeList(newAnimeList);
+
+        dispatch({ type: 'UPDATE_ANIME_LIST', payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+};

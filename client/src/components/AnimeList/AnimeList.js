@@ -4,10 +4,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useStyles from './styles';
 import AnimeListForm from '../AnimeListForm/AnimeListForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAnime } from '../../actions/animeList';
+import { getAnime, updateAnimeList } from '../../actions/animeList';
 import memories from '../../images/memories.png';
 
-export default function CheckboxListSecondary() {
+const AnimeList = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -18,10 +18,13 @@ export default function CheckboxListSecondary() {
 
   const animeList = useSelector((state) => state.animeList);
   const [animeListOrdered, updateAnimeListOrdered] = useState(animeList);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    if (animeList) { updateAnimeListOrdered(animeList); }
-  }, [animeList]);
+    if (animeList && !isDragging) { 
+      updateAnimeListOrdered(animeList);
+    }
+  }, [animeList, isDragging]);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -29,6 +32,11 @@ export default function CheckboxListSecondary() {
     const items = Array.from(animeListOrdered);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
+    for (let index = 0; index < items.length; index++) {
+      items[index].rank = index + 1;
+    }
+    setIsDragging(true);
+    dispatch(updateAnimeList(items));
     updateAnimeListOrdered(items);
   }
 
@@ -53,7 +61,7 @@ export default function CheckboxListSecondary() {
                             src={memories}
                           />
                         </ListItemAvatar>
-                        <ListItemText primary={`${value.title} - Rank #${index + 1}`} />
+                        <ListItemText primary={`${value.title} - Rank #${value.rank}`} />
                       </ListItem>
                     )}
                   </Draggable>
@@ -68,3 +76,5 @@ export default function CheckboxListSecondary() {
     </Grid>
   );
 }
+
+export default AnimeList;

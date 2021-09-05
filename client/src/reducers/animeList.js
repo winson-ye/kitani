@@ -4,6 +4,8 @@ const reducer = (anime = [], action) => {
             return action.payload;
         case 'ADD_TO_ANIME_LIST':
             return [ ...anime, action.payload ];
+        case 'UPDATE_ANIME_LIST':
+            return action.payload;
         default:
             return anime;
     }

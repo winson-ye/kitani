@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import Navbar from './components/NavBar/NavBar';
 import AnimeList from './components/AnimeList/AnimeList';
+import Profile from './components/Profile/Profile';
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/animelist" exact component={AnimeList} />
+          <Route path="/profile" exact component={Profile} />
         </Switch>
       </Container>
     </BrowserRouter>
