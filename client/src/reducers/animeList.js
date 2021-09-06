@@ -1,4 +1,4 @@
-const reducer = (anime = [], action) => {
+const reducer = (anime = { creator: '', shows: [] }, action) => {
     switch (action.type) {
         case 'FETCH_ALL_ANIME':
             return action.payload;

@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 const animeSchema = mongoose.Schema({
     creator: String,
-    shows: [String]
+    shows: [{
+        showName: String,
+        showId: String
+    }]
 });
 
 const Anime = mongoose.model('anime', animeSchema);

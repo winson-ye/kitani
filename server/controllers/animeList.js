@@ -19,16 +19,15 @@ export const getAnime = async (req, res) => {
 
 export const addAnime = async (req, res) => {
     const { id } = req.params;
-    const { newShow } = req.body;
 
     const animeList = await Anime.findOne({ creator: id });
 
     if (!animeList) {
-        const newAnimeList = new Anime({ creator: id, shows: [newShow] });
+        const newAnimeList = new Anime({ creator: id, shows: req.body });
         await newAnimeList.save();
         res.status(201).json(newAnimeList);
     } else {
-        animeList.shows.push(newShow);
+        animeList.shows.push(req.body);
         const updatedAnimeList = await Anime.findOneAndUpdate({ creator: id }, { shows: animeList.shows }, { new: true });
         res.status(200).json(updatedAnimeList);
     }
