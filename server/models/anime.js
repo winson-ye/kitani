@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const animeSchema = mongoose.Schema({
-    title: String,
-    rank: Number
+    creator: String,
+    shows: [String]
 });
 
 const Anime = mongoose.model('anime', animeSchema);

@@ -3,7 +3,7 @@ const reducer = (anime = [], action) => {
         case 'FETCH_ALL_ANIME':
             return action.payload;
         case 'ADD_TO_ANIME_LIST':
-            return [ ...anime, action.payload ];
+            return action.payload;
         case 'UPDATE_ANIME_LIST':
             return action.payload;
         default:

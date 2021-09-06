@@ -26,10 +26,10 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, creator: user?.result?._id, name: `${user?.result?.firstName} ${user?.result?.lastName}` }));
       clear();
     } else {
-      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+      dispatch(updatePost(currentId, { ...postData, creator: user?.result?._id, name: `${user?.result?.firstName} ${user?.result?.lastName}`}));
       clear();
     }
   };

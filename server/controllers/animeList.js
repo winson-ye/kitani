@@ -1,42 +1,45 @@
 import Anime from "../models/anime.js";
+import mongoose from 'mongoose';
 
 export const getAnime = async (req, res) => {
     try {
-        const anime = await Anime.find();
+        const { id } = req.params;
+        const anime = await Anime.findOne({ creator: id });
 
-        res.status(200).json(anime);
+        if (!anime) {
+            res.status(200).json({ creator: '', shows: [] });
+        } else {
+            res.status(200).json(anime);
+        }
+
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
 export const addAnime = async (req, res) => {
-    const anime = req.body;
+    const { id } = req.params;
+    const { newShow } = req.body;
 
-    const newAnime = new Anime(anime);
+    const animeList = await Anime.findOne({ creator: id });
 
-    try {
-        await newAnime.save();
-
-        res.status(201).json(newAnime);
-    } catch (error) {
-        res.status(409).json({ message: error.message })
+    if (!animeList) {
+        const newAnimeList = new Anime({ creator: id, shows: [newShow] });
+        await newAnimeList.save();
+        res.status(201).json(newAnimeList);
+    } else {
+        animeList.shows.push(newShow);
+        const updatedAnimeList = await Anime.findOneAndUpdate({ creator: id }, { shows: animeList.shows }, { new: true });
+        res.status(200).json(updatedAnimeList);
     }
-
 
 }
 
-export const replaceAnimeList = async (req, res) => {
+export const updateAnimeList = async (req, res) => {
+    const { id } = req.params;
     const newAnimeList = req.body;
 
-    await Anime.deleteMany({});
+    const updatedAnimeList = await Anime.findOneAndUpdate({ creator: id }, { shows: newAnimeList }, { new: true });
 
-    for (const newAnime of newAnimeList) {
-        const newAnimeDoc = new Anime(newAnime);
-        await newAnimeDoc.save();
-    }
-
-    const updatedAnimeList = await Anime.find();
-
-    res.json(updatedAnimeList);
+    res.status(200).json(updatedAnimeList);
 }

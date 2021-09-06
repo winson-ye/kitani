@@ -5,23 +5,26 @@ import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAnime, updateAnimeList } from '../../actions/animeList';
 import memories from '../../images/memories.png';
+import { v4 as uuidv4 } from 'uuid';
 
 const AnimeList = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem('profile'));
   
   useEffect(() => {
-    dispatch(getAnime());
-  }, [dispatch]);
+    dispatch(getAnime(user?.result?._id));
+  }, [dispatch, user?.result?._id]);
 
   const animeList = useSelector((state) => state.animeList);
-  const [animeListOrdered, updateAnimeListOrdered] = useState(animeList);
+  const [animeListOrdered, updateAnimeListOrdered] = useState([animeList]);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    if (animeList && !isDragging) { 
-      updateAnimeListOrdered(animeList);
+    if (animeList.length !== 0 && !isDragging) {
+      updateAnimeListOrdered(animeList.shows);
     }
   }, [animeList, isDragging]);
 
@@ -31,11 +34,9 @@ const AnimeList = () => {
     const items = Array.from(animeListOrdered);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    for (let index = 0; index < items.length; index++) {
-      items[index].rank = index + 1;
-    }
+
     setIsDragging(true);
-    dispatch(updateAnimeList(items));
+    dispatch(updateAnimeList(user?.result?._id, items));
     updateAnimeListOrdered(items);
   }
 
@@ -47,7 +48,7 @@ const AnimeList = () => {
               <List {...provided.droppableProps} ref={provided.innerRef}>
               {animeListOrdered.map((value, index) => {
                 return (
-                  <Draggable key={value._id} draggableId={value._id} index={index}>
+                  <Draggable key={uuidv4()} draggableId={uuidv4()} index={index}>
                     {(provided) => (
                       <ListItem button ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <ListItemAvatar>
@@ -56,7 +57,7 @@ const AnimeList = () => {
                             src={memories}
                           />
                         </ListItemAvatar>
-                        <ListItemText primary={`${value.title} - Rank #${value.rank}`} />
+                        <ListItemText primary={`${value} - Rank #${index + 1}`} />
                       </ListItem>
                     )}
                   </Draggable>

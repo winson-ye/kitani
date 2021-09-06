@@ -23,7 +23,9 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/animelist" exact component={AnimeListPage} />
-          <Route path="/profile" exact component={Profile} />
+          <Route path="/profile" render={(props) => (
+            <Profile user={user} />
+          )} />
         </Switch>
       </Container>
     </BrowserRouter>

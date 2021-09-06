@@ -1,8 +1,8 @@
 import * as api from '../api';
 
-export const getAnime = () => async (dispatch) => {
+export const getAnime = (id) => async (dispatch) => {
     try {
-        const { data } = await api.fetchAnime();
+        const { data } = await api.fetchAnime(id);
 
         dispatch({ type: 'FETCH_ALL_ANIME', payload: data });
     } catch (error) {
@@ -10,9 +10,9 @@ export const getAnime = () => async (dispatch) => {
     }
 };
 
-export const addAnime = (anime) => async (dispatch) => {
+export const addAnime = (id, anime) => async (dispatch) => {
     try {
-        const { data } = await api.createAnime(anime);
+        const { data } = await api.createAnime(id, anime);
 
         dispatch({ type: 'ADD_TO_ANIME_LIST', payload: data });
     } catch (error) {
@@ -20,9 +20,9 @@ export const addAnime = (anime) => async (dispatch) => {
     }
 };
 
-export const updateAnimeList = (newAnimeList) => async (dispatch) => {
+export const updateAnimeList = (id, newAnimeList) => async (dispatch) => {
     try {
-        const { data } = await api.updateAnimeList(newAnimeList);
+        const { data } = await api.updateAnimeList(id, newAnimeList);
 
         dispatch({ type: 'UPDATE_ANIME_LIST', payload: data });
     } catch (error) {
