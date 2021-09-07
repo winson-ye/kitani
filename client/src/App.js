@@ -7,6 +7,7 @@ import SignIn from './components/SignIn/SignIn';
 import Navbar from './components/NavBar/NavBar';
 import AnimeListPage from './components/AnimeListPage/AnimeListPage';
 import Profile from './components/Profile/Profile';
+import View from './components/View/View';
 
 const App = () => {
 
@@ -23,9 +24,8 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/animelist" exact component={AnimeListPage} />
-          <Route path="/profile" render={(props) => (
-            <Profile user={user} />
-          )} />
+          <Route path="/profile" exact component={Profile} />
+          <Route path="/view/:userId" exact component={View} />
         </Switch>
       </Container>
     </BrowserRouter>

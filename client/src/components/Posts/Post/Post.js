@@ -6,6 +6,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { likePost, deletePost } from '../../../actions/posts';
 import useStyles from './styles';
@@ -32,7 +33,7 @@ const Post = ({ post, setCurrentId }) => {
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
       <div className={classes.overlay}>
-        <Typography variant="h6">{post.name}</Typography>
+        { post.creator === user?.result?._id ? <Typography variant="h6">{post.name}</Typography> : <Typography className={classes.userLink} component={Link} to={{ pathname: `/view/${post.creator}`, state: { name: post.name} }} variant="h6">{post.name}</Typography> }
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
       {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (

@@ -7,6 +7,10 @@ export default makeStyles({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     backgroundBlendMode: 'darken',
   },
+  userLink: {
+    textDecoration: 'none',
+    color: 'white'
+  },
   border: {
     border: 'solid',
   },

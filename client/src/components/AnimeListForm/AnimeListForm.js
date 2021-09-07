@@ -20,7 +20,7 @@ const AnimeListForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addAnime(user?.result?._id, { showName: userInput, showId: generateKey(userInput )}));
+        dispatch(addAnime(user?.result?._id, { showName: userInput, showId: generateKey(userInput) }));
         setUserInput(''); 
     }
     

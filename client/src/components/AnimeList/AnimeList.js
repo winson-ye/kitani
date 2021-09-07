@@ -6,17 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAnime, updateAnimeList } from '../../actions/animeList';
 import memories from '../../images/memories.png';
 
-const AnimeList = () => {
+const AnimeList = ({ userId }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const user = JSON.parse(localStorage.getItem('profile'));
-  const animeList = useSelector((state) => (state.animeList.creator === user?.result?._id ? state.animeList : { creator: '', shows: [] }));
+  const animeList = useSelector((state) => (state.animeList.creator === userId ? state.animeList : { creator: '', shows: [] }));
 
   useEffect(() => {
-    dispatch(getAnime(user?.result?._id));
-  }, [dispatch, user?.result?._id]);
+    dispatch(getAnime(userId));
+  }, [dispatch, userId]);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -26,7 +25,7 @@ const AnimeList = () => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     animeList.shows = items;
-    dispatch(updateAnimeList(user?.result?._id, items));
+    dispatch(updateAnimeList(userId, items));
   }
 
   return (
