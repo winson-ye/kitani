@@ -34,16 +34,14 @@ const Navbar = ({ user, setUser }) => {
         <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Kitani</Typography>
       </div>
       <Toolbar className={classes.toolbar}>
-        {user?.result ? (
-          <div className={classes.profile}>
-            <Avatar component={Link} to="/profile" className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
-            <Typography className={classes.userName} variant="h6">{`${user?.result.firstName} ${user?.result.lastName}`}</Typography>
-            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
-            <Button variant="contained" color="secondary" href="/animelist">My Anime List</Button>
-          </div>
-        ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
-        )}
+        <div className={classes.profile}>
+          <Avatar component={Link} to="/profile" className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
+          <Typography className={classes.userName} variant="h6">{`${user?.result.firstName} ${user?.result.lastName}`}</Typography>
+        </div>
+        <div className={classes.buttons}>
+          <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
+          <Button variant="contained" color="secondary" href="/animelist">My Anime List</Button>
+        </div>
       </Toolbar>
     </AppBar>
   );

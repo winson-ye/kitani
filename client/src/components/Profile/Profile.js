@@ -14,9 +14,7 @@ const Profile = () => {
             </Paper>
             <Grid container alignItems="flex-start" justifyContent="space-evenly">
                 <AnimeList userId={user?.result?._id} />
-                <Grid item>
-                    <FollowingCard userId={user?.result?._id} />
-                </Grid>
+                <FollowingCard userId={user?.result?._id} />
             </Grid>
         </Container>
     );

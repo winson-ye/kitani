@@ -3,12 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
+      
     },
   },
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginBottom: '30px',
-    padding: theme.spacing(2)
+    padding: theme.spacing(3),
+  },
+  caption: {
+    marginBottom: 10
   },
   form: {
     display: 'flex',
@@ -16,20 +22,25 @@ export default makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
   textField: {
-    width: '50%'
+    width: 500,
+    marginBottom: 10
   },
   buttonClear: {
-    width: '50%'
+    width: '100%'
   },
   fileInput: {
     display: 'flex',
     justifyContent: 'flex-start',
-    width: '50%',
+    width: '100%',
     marginBottom: '10px'
   },
   buttonSubmit: {
     marginBottom: 10,
-    width: '50%'
+    width: '100%'
   },
 }));

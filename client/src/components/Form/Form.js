@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Container, Avatar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
-
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './styles';
 
@@ -45,17 +45,22 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper}>
-      <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-        <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Share A Post'}</Typography>
-        <TextField className={classes.textField} name="title" variant="outlined" label="Title" value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
-        <TextField className={classes.textField} name="message" variant="outlined" label="Message" multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
-        <TextField className={classes.textField} name="tags" variant="outlined" label="Tags (coma separated)" value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
-        <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
-        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit">Submit</Button>
-        <Button className={classes.buttonClear} variant="contained" color="secondary" size="small" onClick={clear}>Clear</Button>
-      </form>
-    </Paper>
+    <Container maxWidth="sm">
+      <Paper className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <PostAddIcon />
+        </Avatar>
+        <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+          <Typography className={classes.caption} gutterBottom={true} variant="h6">{currentId ? `Editing "${post.title}"` : 'Share A Post'}</Typography>
+          <TextField className={classes.textField} name="title" variant="outlined" label="Title" value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+          <TextField className={classes.textField} name="message" variant="outlined" label="Message" multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
+          <TextField className={classes.textField} name="tags" variant="outlined" label="Tags (coma separated)" value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
+          <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+          <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit">Submit</Button>
+          <Button className={classes.buttonClear} variant="contained" color="secondary" size="small" onClick={clear}>Clear</Button>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 

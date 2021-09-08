@@ -19,12 +19,11 @@ export default makeStyles((theme) => ({
   },
   toolbar: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   profile: {
     display: 'flex',
-    justifyContent: 'space-between',
-    width: '400px',
+    width: '300px',
   },
   userName: {
     display: 'flex',
@@ -34,9 +33,13 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
+  logout: {
+    marginRight: theme.spacing(2)
+  },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
-    textDecoration: 'none'
+    textDecoration: 'none',
+    marginRight: theme.spacing(2)
   },
 }));

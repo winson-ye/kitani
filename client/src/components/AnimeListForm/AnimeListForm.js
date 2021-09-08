@@ -1,4 +1,4 @@
-import { TextField, Button, Paper } from '@material-ui/core';
+import { TextField, Button, Paper, Typography, Grid } from '@material-ui/core';
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
@@ -25,12 +25,15 @@ const AnimeListForm = () => {
     }
     
     return (
-        <form onSubmit={handleSubmit}>
+        <Grid item>
             <Paper className={classes.paper}>
-                <TextField name="userInput" variant="outlined" label="Anime To Add" fullWidth value={userInput} onChange={handleChange} />
-                <Button className={classes.submit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                <form onSubmit={handleSubmit} className={classes.form}>
+                    <Typography className={classes.caption} gutterBottom={true} variant="h6">Add An Anime</Typography>
+                    <TextField className={classes.textField} name="userInput" variant="outlined" label="Anime Title" fullWidth value={userInput} onChange={handleChange} />
+                    <Button className={classes.submit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                </form>
             </Paper>
-        </form>
+        </Grid>
     );
 };
 

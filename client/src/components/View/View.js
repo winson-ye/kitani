@@ -1,4 +1,4 @@
-import { Typography, Container, Paper, Grid, Button } from '@material-ui/core';
+import { Typography, Paper, Grid, Button } from '@material-ui/core';
 import useStyles from './styles';
 import AnimeList from '../AnimeList/AnimeList';
 import FollowingCard from '../FollowingCard/FollowingCard';
@@ -20,20 +20,18 @@ const View = (props) => {
 
     return (
         userId === signedInUser?.result?._id ? null : (
-            <Container>
+            <div>
                 <Paper className={classes.paperHeading}>
-                    <Typography className={classes.heading}>{`${name}'s Profile`}</Typography>
-                    <Button onClick={handleFollow}>
+                    <Typography>{`${name}'s Profile`}</Typography>
+                    <Button className={classes.followButton} onClick={handleFollow}>
                         <AddIcon />
                     </Button>
                 </Paper>
                 <Grid container alignItems="flex-start" justifyContent="space-evenly">
                     <AnimeList userId={userId} />
-                    <Grid item>
-                        <FollowingCard userId={userId} />
-                    </Grid>
+                    <FollowingCard userId={userId} />
                 </Grid>
-            </Container>
+            </div>
         )
     );
 };

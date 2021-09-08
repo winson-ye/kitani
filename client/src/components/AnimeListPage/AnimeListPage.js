@@ -7,9 +7,7 @@ const AnimeListPage = () => {
 
     return (
         <Grid container direction="column" alignItems="center">
-            <Grid item>
-                <AnimeListForm />
-            </Grid>
+            <AnimeListForm />
             <AnimeList userId={user?.result?._id} />
         </Grid>
     );
