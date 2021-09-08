@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './components/Home/Home';
@@ -19,15 +19,14 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Container maxWidth="lg">
-        <Navbar user={user} setUser={setUser} />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/animelist" exact component={AnimeListPage} />
-          <Route path="/profile" exact component={Profile} />
-          <Route path="/view/:userId" exact component={View} />
-        </Switch>
-      </Container>
+      <CssBaseline />
+      <Navbar user={user} setUser={setUser} />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/animelist" exact component={AnimeListPage} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/view/:userId" exact component={View} />
+      </Switch>
     </BrowserRouter>
   );
 };

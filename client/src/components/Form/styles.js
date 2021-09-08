@@ -7,18 +7,29 @@ export default makeStyles((theme) => ({
     },
   },
   paper: {
-    padding: theme.spacing(2),
+    marginBottom: '30px',
+    padding: theme.spacing(2)
   },
   form: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  textField: {
+    width: '50%'
+  },
+  buttonClear: {
+    width: '50%'
   },
   fileInput: {
-    width: '97%',
-    margin: '10px 0',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    width: '50%',
+    marginBottom: '10px'
   },
   buttonSubmit: {
     marginBottom: 10,
+    width: '50%'
   },
 }));
