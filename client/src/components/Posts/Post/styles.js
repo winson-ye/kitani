@@ -22,7 +22,10 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     position: 'relative',
     width: 552,
-    marginBottom: 30
+    marginBottom: 30,
+    [theme.breakpoints.down('xs')]: {
+      width: 345
+    },
   },
   overlay: {
     position: 'absolute',

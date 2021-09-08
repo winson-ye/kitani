@@ -38,10 +38,8 @@ const Navbar = ({ user, setUser }) => {
           <Avatar component={Link} to="/profile" className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
           <Typography className={classes.userName} variant="h6">{`${user?.result.firstName} ${user?.result.lastName}`}</Typography>
         </div>
-        <div className={classes.buttons}>
-          <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
-          <Button variant="contained" color="secondary" href="/animelist">My Anime List</Button>
-        </div>
+        <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
+        <Button variant="contained" className={classes.anilist} color="secondary" href="/animelist">My Anime List</Button>
       </Toolbar>
     </AppBar>
   );

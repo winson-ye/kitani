@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper, Container, Avatar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
-import PostAddIcon from '@material-ui/icons/PostAdd';
 import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './styles';
+import { Link } from 'react-router-dom';
+
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
@@ -47,9 +48,7 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <Container maxWidth="sm">
       <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <PostAddIcon />
-        </Avatar>
+        <Avatar component={Link} to="/profile" className={classes.avatar} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
         <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
           <Typography className={classes.caption} gutterBottom={true} variant="h6">{currentId ? `Editing "${post.title}"` : 'Share A Post'}</Typography>
           <TextField className={classes.textField} name="title" variant="outlined" label="Title" value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
