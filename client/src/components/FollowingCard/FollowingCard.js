@@ -9,7 +9,13 @@ const FollowingCard = ({ userId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const followingList = useSelector((state) => (state.following.follower === userId ? state.following : { follower: '', followees: [] }));
+  const followingList = useSelector((state) => {
+    if (state.following.oldFollowing) {
+      return (state.following.oldFollowing.follower === userId ? state.following.oldFollowing : { follower: '', followees: [] });
+    } else {
+      return (state.following.follower === userId ? state.following : { follower: '', followees: [] });
+    }
+  });
 
   useEffect(() => {
     dispatch(getFollowing(userId));

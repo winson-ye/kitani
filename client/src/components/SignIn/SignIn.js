@@ -43,7 +43,7 @@ export default function SignIn( { setUser }) {
         <Typography variant="h5">
           {isSignUp ? 'Sign up' : 'Sign in'}
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           { isSignUp && (
             <>
               <TextField
@@ -73,6 +73,7 @@ export default function SignIn( { setUser }) {
             fullWidth
             label="Email Address"
             name="email"
+            type="email"
             onChange={handleChange}
           />
           <TextField

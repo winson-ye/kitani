@@ -32,7 +32,7 @@ export const addFollowee = async (req, res) => {
             res.status(400).json(newFolloweeList);
         } else {
             followeeList.followees.push(req.body);
-            const updatedFolloweeList = await Following.findOneAndUpdate({ creator: id }, { followees: followeeList.followees }, { new: true });
+            const updatedFolloweeList = await Following.findOneAndUpdate({ follower: id }, { followees: followeeList.followees }, { new: true });
             res.status(200).json(updatedFolloweeList);
         }
     }

@@ -3,7 +3,7 @@ const reducer = (following = { follower: '', followees: [] }, action) => {
         case 'FETCH_ALL_FOLLOWEES':
             return action.payload;
         case 'ADD_TO_FOLLOWEES':
-            return action.payload;
+            return { ...action.payload, oldFollowing: following }
         default:
             return following;
     }
