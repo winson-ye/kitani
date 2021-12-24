@@ -10,19 +10,21 @@ import Profile from './components/Profile/Profile';
 import View from './components/View/View';
 
 const App = () => {
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-
-  if (!user) {
-    return <SignIn setUser={setUser} />
-  }
 
   return (
     <BrowserRouter>
       <CssBaseline />
-      <Navbar user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser}/>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route 
+          path="/signin" 
+          exact 
+          render={(props) => (
+            <SignIn {...props} setUser={setUser} />
+          )} 
+        />
         <Route path="/animelist" exact component={AnimeListPage} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/view/:userId" exact component={View} />

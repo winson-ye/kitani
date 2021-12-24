@@ -5,13 +5,15 @@ import { Paper, Container, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 import { signin, signup } from '../../actions/auth';
+import { useHistory } from 'react-router-dom';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-export default function SignIn( { setUser }) {
+export default function SignIn({ setUser }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(false);
   const [form, setForm] = useState(initialState);
 
@@ -24,9 +26,9 @@ export default function SignIn( { setUser }) {
     e.preventDefault();
 
     if (isSignUp) {
-      dispatch(signup(form, setUser));
+      dispatch(signup(form, history, setUser));
     } else {
-      dispatch(signin(form, setUser));
+      dispatch(signin(form, history, setUser));
     }
   }
 

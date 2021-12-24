@@ -3,18 +3,23 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
-
+import { useHistory } from 'react-router-dom';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
 const Navbar = ({ user, setUser }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
     setUser(null);
   };
+
+  const signin = () => {
+    history.push('/signin');
+  }
 
   useEffect(() => {
     const token = user?.token;
@@ -36,9 +41,16 @@ const Navbar = ({ user, setUser }) => {
       <Toolbar className={classes.toolbar}>
         <div className={classes.profile}>
           <Avatar component={Link} to="/profile" className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
-          <Typography className={classes.userName} variant="h6">{`${user?.result.firstName} ${user?.result.lastName}`}</Typography>
+          {user &&
+            <Typography className={classes.userName} variant="h6">
+              {`${user?.result.firstName} ${user?.result.lastName}`}
+            </Typography>
+          }
         </div>
-        <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
+        {user 
+        ? <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
+        : <Button variant="contained" className={classes.logout} color="primary" onClick={signin}>Sign In</Button>  
+        }
         <Button variant="contained" className={classes.anilist} color="secondary" href="/animelist">My Anime List</Button>
       </Toolbar>
     </AppBar>
