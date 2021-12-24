@@ -19,6 +19,10 @@ app.use('/users', userRoutes);
 app.use('/animelist', animeListRoutes);
 app.use('/following', followingRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Hello to Memories API')
+});
+
 const CONNECTION_URL = 'mongodb+srv://winson-ye:tripter908@cluster0.nzdnn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 8080;
 
