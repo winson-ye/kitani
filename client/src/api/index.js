@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-// For testing
-// const API = axios.create({ baseURL: 'http://localhost:5000' })
-
-// For deployment
 const API = axios.create({ baseURL: 'https://kitani.herokuapp.com/' })
 
 API.interceptors.request.use((req) => {
