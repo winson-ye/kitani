@@ -2,8 +2,6 @@ import UserModel from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 
-const secret = 'test';
-
 export const signIn = async (req, res) => {
     const { email, password } = req.body;
 
@@ -16,7 +14,7 @@ export const signIn = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: "1h" });
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.SECRET, { expiresIn: "1h" });
 
         res.status(200).json({ result: existingUser, token });
     } catch (error) {
@@ -38,7 +36,7 @@ export const signUp = async (req, res) => {
 
         const result = await UserModel.create({ email, password: hashedPassword, firstName: firstName, lastName: lastName });
 
-        const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
+        const token = jwt.sign({ email: result.email, id: result._id }, process.env.SECRET, { expiresIn: "1h" });
 
         res.status(201).json({ result, token });
     } catch (error) {
